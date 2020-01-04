@@ -3,6 +3,11 @@ package test.java;
 
 import static org.junit.Assert.*;
 
+import java.util.concurrent.TimeUnit;
+
+import org.awaitility.Awaitility.*;
+import org.awaitility.Duration;
+
 import javax.validation.constraints.AssertTrue;
 
 import org.junit.Test;
@@ -22,20 +27,20 @@ public class SeleniumTest {
 	    System.setProperty("webdriver.chrome.driver", "./chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
 	    driver.get("http://localhost:9090/jee-project-Version2/Controller");
-	    Thread.sleep(2000);  // Let the user actually see something!
+	    org.awaitility.Awaitility.await().atLeast(2,TimeUnit.SECONDS);  // Let the user actually see something!
 	    WebElement inputBoxA = driver.findElement(By.name("a"));
 	    WebElement inputBoxB = driver.findElement(By.name("b"));
 	    WebElement calculateButton = driver.findElement(By.name("action"));
 	    inputBoxA.sendKeys(String.valueOf(numberA));
-	    Thread.sleep(2000);
+	    org.awaitility.Awaitility.await().atLeast(2,TimeUnit.SECONDS);
 	    inputBoxB.sendKeys(String.valueOf(numberB));
-	    Thread.sleep(1000);
+	    org.awaitility.Awaitility.await().atLeast(1,TimeUnit.SECONDS);
 	    calculateButton.click();
 	    String oldUrl = driver.getCurrentUrl();
 
-	    Thread.sleep(4000); // We wait for a possible page loading
+	    org.awaitility.Awaitility.await().atLeast(4,TimeUnit.SECONDS); // We wait for a possible page loading
 	    String newUrl = driver.getCurrentUrl();
-	    assertTrue(oldUrl.equals(newUrl));
+	    assertTrue(!oldUrl.equals(newUrl));
 	    
 	    driver.quit();
 	}
@@ -46,17 +51,18 @@ public class SeleniumTest {
 			System.setProperty("webdriver.chrome.driver", "./chromedriver.exe");
 			WebDriver driver = new ChromeDriver();
 		    driver.get("http://localhost:9090/jee-project-Version2/Controller");
-		    Thread.sleep(2000);  // Let the user actually see something!
+		    org.awaitility.Awaitility.await().atLeast(2,TimeUnit.SECONDS);  // Let the user actually see something!
 		    WebElement inputBoxA = driver.findElement(By.name("a"));
 		    WebElement inputBoxB = driver.findElement(By.name("b"));
 		    WebElement calculateButton = driver.findElement(By.name("action"));
 		    inputBoxA.sendKeys("abc");
-		    Thread.sleep(1000);
+		    org.awaitility.Awaitility.await().atLeast(1,TimeUnit.SECONDS);
 		    inputBoxB.sendKeys("sqhdéqé&/");
-		    Thread.sleep(500);
+		    org.awaitility.Awaitility.await().atLeast(1,TimeUnit.SECONDS);
+
 		    calculateButton.click();
 		    String oldUrl = driver.getCurrentUrl();
-		    Thread.sleep(4000); // We wait for a possible page loading
+		    org.awaitility.Awaitility.await().atLeast(4,TimeUnit.SECONDS); // We wait for a possible page loading
 		    String newUrl = driver.getCurrentUrl();
 		    
 		    // If the system is correct, then the the page should be the same because the text from inputs a or/and b were rejected
@@ -68,5 +74,8 @@ public class SeleniumTest {
 		}
 		
 	}
+	
+
+
 }
 

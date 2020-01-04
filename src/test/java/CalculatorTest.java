@@ -26,7 +26,7 @@ public class CalculatorTest extends TestCase {
 	@Test
 	public void testSumString(){
 		Calculator c = new Calculator();
-		float resultA = c.Sum("230", "25.5");
+		float resultA = c.sum("230", "25.5");
 		assertTrue(230+25.5f == resultA);
 	}
 }

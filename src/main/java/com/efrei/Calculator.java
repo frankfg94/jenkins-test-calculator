@@ -1,12 +1,12 @@
 package main.java.com.efrei;
 
 public class Calculator {
-	public float Sum(float a, float b){
+	public float sum(float a, float b){
 		return a+b;
 	}
 	
-	public float Sum(String a, String b){
-		return Sum(Float.parseFloat(a),Float.parseFloat(b));
+	public float sum(String a, String b){
+		return sum(Float.parseFloat(a),Float.parseFloat(b));
 	}
 	
 	public float multiply(float a, float b){

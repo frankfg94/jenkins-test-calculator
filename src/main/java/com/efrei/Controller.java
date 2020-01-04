@@ -19,7 +19,6 @@ public class Controller extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 	//So that we can access the user type in both welcome and details
-    String userLogin = "";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,7 +32,7 @@ public class Controller extends HttpServlet {
      * @throws java.lang.ClassNotFoundException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException, ClassNotFoundException {
+            throws ServletException, IOException {
 
 	      System.out.println("Hello world, entered controller");
     	  String context = request.getParameter("action");
@@ -42,7 +41,7 @@ public class Controller extends HttpServlet {
                   switch (context) {
                       case "Connect":
                     	  System.out.println("Connect command");
-                    	  request.setAttribute("calcul", new Calculator().Sum(request.getParameter("a"),request.getParameter("b")));
+                    	  request.setAttribute("calcul", new Calculator().sum(request.getParameter("a"),request.getParameter("b")));
                           request.getRequestDispatcher("WEB-INF\\result.jsp").forward(request, response);
                           break;
                       default : 
@@ -68,11 +67,7 @@ public class Controller extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -86,11 +81,7 @@ public class Controller extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
