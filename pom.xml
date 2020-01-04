@@ -12,7 +12,30 @@
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <sonar.sources>src/main</sonar.sources>
+        <sonar.tests>src/test</sonar.tests>
+		<!-- Below property indicates the pattern of the test suite -->
+		<runSuite>**/*Suite.class</runSuite>
+		<!-- Sonar-JaCoCo properties -->
+		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+		<sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
+		<sonar.language>java</sonar.language>
     </properties>
+   <profiles>
+		<profile>
+	       <id>sonar</id>
+	       <activation>
+	            <activeByDefault>true</activeByDefault>
+	       </activation>
+	       <properties>
+	           <sonar.host.url>
+	                http://localhost:9000
+	           </sonar.host.url>
+	       </properties>
+		</profile>
+   </profiles>
+	
     
     <dependencies>
     <!-- https://mvnrepository.com/artifact/org.awaitility/awaitility -->
@@ -97,6 +120,26 @@
 
     <build>
         <plugins>
+        <!-- Jacoco plugin -->
+		<plugin>
+<!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
+    <groupId>org.jacoco</groupId>
+    <artifactId>jacoco-maven-plugin</artifactId>
+    <version>0.8.5</version>
+
+			<configuration>
+				<destFile>${sonar.jacoco.reportPath}</destFile>
+				<append>true</append>
+			</configuration>
+			<executions>
+				<execution>
+					<id>agent</id>
+					<goals>
+						<goal>prepare-agent</goal>
+					</goals>
+				</execution>
+			</executions>
+		</plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -134,5 +177,4 @@
 				</plugin>
         </plugins>
     </build>
-
 </project>

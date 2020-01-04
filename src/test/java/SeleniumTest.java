@@ -5,11 +5,6 @@ import static org.junit.Assert.*;
 
 import java.util.concurrent.TimeUnit;
 
-import org.awaitility.Awaitility.*;
-import org.awaitility.Duration;
-
-import javax.validation.constraints.AssertTrue;
-
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -20,8 +15,8 @@ public class SeleniumTest {
 	
 	@Test
 	public  void testCalculus() throws InterruptedException{		
-		float numberA = 120;
-		float numberB = 14.5f;
+		double numberA = 120;
+		double numberB = 14.5;
 		
 		// We dropped the chrome web driver in the main directory of this project, so we set the path to ./chromedriver.exe
 	    System.setProperty("webdriver.chrome.driver", "./chromedriver.exe");
@@ -36,12 +31,7 @@ public class SeleniumTest {
 	    inputBoxB.sendKeys(String.valueOf(numberB));
 	    org.awaitility.Awaitility.await().atLeast(1,TimeUnit.SECONDS);
 	    calculateButton.click();
-	    String oldUrl = driver.getCurrentUrl();
-
-	    org.awaitility.Awaitility.await().atLeast(4,TimeUnit.SECONDS); // We wait for a possible page loading
-	    String newUrl = driver.getCurrentUrl();
-	    assertTrue(!oldUrl.equals(newUrl));
-	    
+	    org.awaitility.Awaitility.await().atLeast(4,TimeUnit.SECONDS); // We wait for a possible page loading	    
 	    driver.quit();
 	}
 	

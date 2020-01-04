@@ -1,7 +1,6 @@
 package main.java.com.efrei;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -34,19 +33,17 @@ public class Controller extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-	      System.out.println("Hello world, entered controller");
-    	  String context = request.getParameter("action");
-          System.out.println("Context: " + context);
-          if (context != null) {
-                  switch (context) {
-                      case "Connect":
-                    	  System.out.println("Connect command");
-                    	  request.setAttribute("calcul", new Calculator().sum(request.getParameter("a"),request.getParameter("b")));
-                          request.getRequestDispatcher("WEB-INF\\result.jsp").forward(request, response);
-                          break;
-                      default : 
-                          request.getRequestDispatcher("WEB-INF\\hello.jsp").forward(request, response);
-                    	  break;
+          Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, "Entered Controller successfully");
+    	  String prevAction = request.getParameter("action");
+          if (prevAction != null) {
+                  if(prevAction.equals("Connect"))
+                  {
+                	  request.setAttribute("calcul", new Calculator().sum(request.getParameter("a"),request.getParameter("b")));
+                	  request.getRequestDispatcher("WEB-INF\\result.jsp").forward(request, response);
+                  }
+                  else
+                  {
+                      request.getRequestDispatcher("WEB-INF\\hello.jsp").forward(request, response);
                   }
           }
           else
@@ -66,8 +63,12 @@ public class Controller extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+            {
+        try {
+			processRequest(request, response);
+		} catch (ServletException | IOException e) {
+	          Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, e.getStackTrace());
+		}
     }
 
     /**
@@ -80,8 +81,12 @@ public class Controller extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+            {
+        try {
+			processRequest(request, response);
+		} catch (ServletException | IOException e) {
+	          Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, e.getStackTrace());
+		}
     }
 
     /**

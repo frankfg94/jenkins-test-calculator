@@ -12,21 +12,21 @@ public class CalculatorTest extends TestCase {
 	
 	@Test
 	public void testMultiply(){
-		float a = 5;
-		float b = 5;
-		float c = 2;
-		float d = 15.5f;
+		double a = 5;
+		double b = 5;
+		double c = 2;
+		double d = 15.5f;
 		Calculator calc = new Calculator();
-		float resultA = calc.multiply(a, b);
+		double resultA = calc.multiply(a, b);
 		assertTrue(a*b == resultA);
-		float resultB = calc.multiply(c, d);
+		double resultB = calc.multiply(c, d);
 		assertTrue(c*d == resultB);
 	}
 	
 	@Test
 	public void testSumString(){
 		Calculator c = new Calculator();
-		float resultA = c.sum("230", "25.5");
+		double resultA = c.sum("230", "25.5");
 		assertTrue(230+25.5f == resultA);
 	}
 }
