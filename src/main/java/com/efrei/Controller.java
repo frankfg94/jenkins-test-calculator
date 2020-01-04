@@ -1,4 +1,4 @@
-package com.efrei;
+package main.java.com.efrei;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -14,7 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 public class Controller extends HttpServlet {
 
 
-    //So that we can access the user type in both welcome and details
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	//So that we can access the user type in both welcome and details
     String userLogin = "";
 
     /**

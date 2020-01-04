@@ -1,4 +1,4 @@
-package com.efrei;
+package main.java.com.efrei;
 
 public class Calculator {
 	public float Sum(float a, float b){

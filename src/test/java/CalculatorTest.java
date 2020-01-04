@@ -2,9 +2,9 @@ package test.java;
 
 import org.junit.Test;
 
-import com.efrei.Calculator;
 
 import junit.framework.TestCase;
+import main.java.com.efrei.Calculator;
 
 public class CalculatorTest extends TestCase {
 	

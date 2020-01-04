@@ -17,8 +17,8 @@
         <div class="wrapper">
             <form class="form-signin" name ='myform' action='Controller'>
                 <h2 class="form-signin-heading text-center">Login</h2>
-                <input type='text' class="form-control" name='a' placeholder="Number a" autofocus="">
-                <input type='text' class="form-control" name='b' placeholder="Number b" autofocus="">
+                <input type='text' class="form-control" name='a' placeholder="Number a" pattern="[0-9]" autofocus="">
+                <input type='text' class="form-control" name='b' placeholder="Number b" pattern="[0-9]" autofocus="">
                 <%
                     if (request.getAttribute("errKey") != null) {
                         out.print((String) request.getAttribute("errKey"));
