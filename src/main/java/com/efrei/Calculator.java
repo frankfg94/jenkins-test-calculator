@@ -5,11 +5,15 @@ public class Calculator {
 		return a+b;
 	}
 	
-	public double sum(String a, String b){
+	public double sum(String a, String b) throws NullPointerException{
 		return sum(Double.parseDouble(a),Double.parseDouble(b));
 	}
 	
 	public double multiply(double a,double b){
 		return a * b;
 	}
-}
+	
+	public double multiply(String a, String b) throws NullPointerException{
+		return multiply(Double.parseDouble(a),Double.parseDouble(b));
+		}
+	}

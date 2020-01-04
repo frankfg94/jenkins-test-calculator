@@ -30,15 +30,22 @@ public class Controller extends HttpServlet {
      * @throws java.sql.SQLException
      * @throws java.lang.ClassNotFoundException
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    public void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-          Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, "Entered Controller successfully");
+          Logger.getLogger(Controller.class.getName()).log(Level.INFO, "Entered Controller successfully");
     	  String prevAction = request.getParameter("action");
           if (prevAction != null) {
                   if(prevAction.equals("Connect"))
                   {
                 	  request.setAttribute("calcul", new Calculator().sum(request.getParameter("a"),request.getParameter("b")));
+                      response.getWriter().write("add result.jsp");
+                	  request.getRequestDispatcher("WEB-INF\\result.jsp").forward(request, response);
+                  }
+                  else if (prevAction.equals("Multiply"))
+                  {
+                	  request.setAttribute("calcul", new Calculator().multiply(request.getParameter("a"),request.getParameter("b")));
+                      response.getWriter().write("mul result.jsp");
                 	  request.getRequestDispatcher("WEB-INF\\result.jsp").forward(request, response);
                   }
                   else
@@ -48,6 +55,7 @@ public class Controller extends HttpServlet {
           }
           else
           {
+              response.getWriter().write("hello.jsp");
               request.getRequestDispatcher("WEB-INF\\hello.jsp").forward(request, response);
           }
     }
@@ -62,7 +70,7 @@ public class Controller extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
             {
         try {
 			processRequest(request, response);
@@ -80,7 +88,7 @@ public class Controller extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
             {
         try {
 			processRequest(request, response);

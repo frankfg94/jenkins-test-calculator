@@ -24,6 +24,15 @@ public class CalculatorTest extends TestCase {
 	}
 	
 	@Test
+	public void testMultiplyString(){
+		String a = "5";
+		String b = "3";
+		Calculator calc = new Calculator();
+		double resultA = calc.multiply(a, b);
+		assertTrue(Double.parseDouble(a)*Double.parseDouble(b) == resultA);
+	}
+	
+	@Test
 	public void testSumString(){
 		Calculator c = new Calculator();
 		double resultA = c.sum("230", "25.5");
