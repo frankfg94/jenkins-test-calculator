@@ -1,7 +1,2 @@
-com\mycompany\jee_jpa\Constants.class
-com\mycompany\jee_jpa\Jeeprj.class
-com\mycompany\jee_jpa\JeeprjSB.class
-com\mycompany\jee_jpa\Credentials.class
-com\mycompany\jee_jpa\Jeeprj_.class
-com\mycompany\jee_jpa\Credentials_.class
-com\mycompany\jee_jpa\Controller.class
+com\efrei\Controller.class
+com\efrei\Calculator.class
