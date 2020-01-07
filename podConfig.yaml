@@ -1,0 +1,98 @@
+#
+# Architecture
+#   
+#
+#
+# The code you're developing
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: prototype
+  name: prototype
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: prototype
+  template:
+    metadata:
+      labels:
+        run: prototype
+    spec:
+      containers:
+      - env:
+        - name: SERVICE_NAME
+          value: "1"
+          
+        # Maven for compiling & testing the code
+        image: maven:3.3-jdk-8
+        imagePullPolicy: Never
+        name: maven
+        
+        # Tomcat for running the tests for the web app
+      - image: tomcat:8.0
+        imagePullPolicy: Always
+        name: tomcat
+        ports:
+          - containerPort: 9090
+          
+        # Sonarqube for checking the code quality
+      - image: sonarqube:8.0
+        imagePullPolicy: Always
+        name: sonarqube
+        ports:
+          - containerPort: 9000
+          
+        # Selenium within an automated chrome web browser
+      - image: selenium/node-chrome:3.141.59-yttrium
+        imagePullPolicy: Always
+        name: selenium-chrome
+        ports:
+          - containerPort: 4444
+         
+        # ngrok for the github hook
+      - image: wernight/ngrok
+        imagePullPolicy: Always
+        name: ngrok
+          
+        # performance testing
+      - image: justb4/jmeter:5.1.1
+        imagePullPolicy: Always
+        name: jmeter   
+        
+       # Jenkins for starting the pipeline
+      - image: jenkins
+        imagePullPolicy: Always
+        name : jenkins
+        ports:
+          - containerPort: 8080        
+        env:
+        - name: ENVOY_XDS_HOST
+          value: "rotor.default.svc.cluster.local" # Change if using a different namespace
+        - name: ENVOY_XDS_PORT
+          value: "50000"
+        - name: ENVOY_NODE_ZONE
+          value: dev-local
+        - name: ENVOY_NODE_CLUSTER
+          value: dev-proxy
+      restartPolicy: Always
+---
+# The service, to access the deployment for the code you're developing
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: prototype
+  name: prototype
+spec:
+  externalTrafficPolicy: Cluster
+  # iicch ?
+  ports:
+  - nodePort: 32730
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    run: prototype
+  type: NodePort

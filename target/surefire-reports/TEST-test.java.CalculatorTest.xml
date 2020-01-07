@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="3" failures="0" name="test.java.CalculatorTest" time="0.006" errors="0" skipped="0">
+<testsuite tests="3" failures="0" name="test.java.CalculatorTest" time="0.042" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="11.0.5+10-LTS"/>
@@ -45,7 +45,7 @@
     <property name="java.class.path" value="C:\Program Files\apache-maven-3.6.2\bin\..\boot\plexus-classworlds-2.6.0.jar"/>
     <property name="java.vm.specification.version" value="11"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher test"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean install org.sonarsource.scanner.maven:sonar-maven-plugin:3.6.0.1398:sonar"/>
     <property name="java.home" value="C:\Program Files\Java\jdk-11.0.5"/>
     <property name="user.language" value="fr"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
@@ -63,7 +63,7 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="test.java.CalculatorTest" name="testMultiplyString" time="0.006"/>
-  <testcase classname="test.java.CalculatorTest" name="testMultiply" time="0"/>
-  <testcase classname="test.java.CalculatorTest" name="testSumString" time="0"/>
+  <testcase classname="test.java.CalculatorTest" name="testMultiplyString" time="0.025"/>
+  <testcase classname="test.java.CalculatorTest" name="testMultiply" time="0.015"/>
+  <testcase classname="test.java.CalculatorTest" name="testSumString" time="0.002"/>
 </testsuite>
